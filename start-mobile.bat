@@ -1,5 +1,5 @@
 @echo off
-setlocal enabledelayedexpansion
+setlocal
 title SafeScape AR - Mobile App (Expo)
 color 0B
 
@@ -9,7 +9,7 @@ echo            SafeScape AR - Mobile App (React Native Expo)
 echo  ================================================================
 echo.
 
-set PROJROOT=%~dp0
+set "PROJROOT=%~dp0"
 cd /d "%PROJROOT%mobile"
 
 REM --- Pre-flight Checks ---
@@ -17,8 +17,8 @@ echo  -- Checking Mobile Environment ------------------
 echo.
 
 node --version >nul 2>&1
-if !errorlevel! neq 0 (
-    echo   [FAIL] Node.js not found! Install from https://nodejs.org/
+if %errorlevel% neq 0 (
+    echo   [FAIL] Node.js not found in PATH!
     pause
     exit /b 1
 )
@@ -26,8 +26,8 @@ for /f "tokens=*" %%i in ('node --version 2^>^&1') do echo   [OK] Node.js %%i
 
 if not exist "node_modules" (
     echo   [WARN] node_modules not found. Installing dependencies...
-    npm install
-    if !errorlevel! neq 0 (
+    call npm install
+    if %errorlevel% neq 0 (
         echo   [FAIL] Failed to install mobile dependencies.
         pause
         exit /b 1
@@ -55,7 +55,7 @@ echo   Press Ctrl+C to stop Expo server
 echo  ----------------------------------------------------------------
 echo.
 
-npx expo start
+call npx expo start
 
 echo.
 echo  Expo server stopped.

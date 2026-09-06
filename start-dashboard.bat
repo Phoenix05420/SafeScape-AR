@@ -1,5 +1,5 @@
 @echo off
-setlocal enabledelayedexpansion
+setlocal
 title SafeScape AR - Dashboard
 color 0D
 
@@ -9,7 +9,7 @@ echo            SafeScape AR - Admin Dashboard
 echo  ================================================================
 echo.
 
-set PROJROOT=%~dp0
+set "PROJROOT=%~dp0"
 cd /d "%PROJROOT%dashboard"
 
 REM --- Pre-flight Checks ---
@@ -17,47 +17,28 @@ echo  -- Pre-flight Checks ----------------------------
 echo.
 
 node --version >nul 2>&1
-if !errorlevel! neq 0 (
-    echo   [FAIL] Node.js not found! Install from https://nodejs.org/
+if %errorlevel% neq 0 (
+    echo   [FAIL] Node.js not found in PATH!
     pause
     exit /b 1
 )
 for /f "tokens=*" %%i in ('node --version 2^>^&1') do echo   [OK] Node.js %%i
 
-npm --version >nul 2>&1
-if !errorlevel! neq 0 (
-    echo   [FAIL] npm not found! Reinstall Node.js from https://nodejs.org/
-    pause
-    exit /b 1
-)
-for /f "tokens=*" %%i in ('npm --version 2^>^&1') do echo   [OK] npm v%%i
-
-if not exist "package.json" (
-    echo   [FAIL] package.json not found! Project files may be corrupted.
-    pause
-    exit /b 1
-)
-echo   [OK] package.json found
-
 if not exist "node_modules" (
     echo   [WARN] node_modules not found. Installing dependencies...
-    echo         (This may take a minute on first run)
-    echo.
-    npm install
-    if !errorlevel! neq 0 (
-        echo.
-        echo   [FAIL] npm install failed! Check your network and try again.
+    call npm install
+    if %errorlevel% neq 0 (
+        echo   [FAIL] npm install failed.
         pause
         exit /b 1
     )
-    echo.
-    echo   [OK] Dependencies installed successfully
+    echo   [OK] Dependencies installed
 ) else (
-    echo   [OK] node_modules found
+    echo   [OK] Dashboard dependencies verified
 )
 
 if not exist "src\App.tsx" (
-    echo   [FAIL] src\App.tsx not found! Project files may be corrupted.
+    echo   [FAIL] src\App.tsx not found!
     pause
     exit /b 1
 )
@@ -82,7 +63,7 @@ echo   Press Ctrl+C to stop the server
 echo  ----------------------------------------------------------------
 echo.
 
-npm run dev
+call npm run dev
 
 echo.
 echo  Dashboard stopped.

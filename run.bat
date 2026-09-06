@@ -1,94 +1,90 @@
 @echo off
-chcp 65001 >nul 2>&1
-setlocal enabledelayedexpansion
+setlocal
 title SafeScape AR - Master Launcher
 color 0A
 
-cls
 echo.
 echo  ================================================================
 echo.
-echo        🛡️  SAFESCAPE AR — ONE-CLICK MASTER LAUNCHER
-echo        Augmented Reality Industrial Safety Training Platform
-echo        Smart India Hackathon (SIH26041)
+echo        SafeScape AR - ONE-CLICK MASTER LAUNCHER
+echo        Industrial Safety AR Training Platform (SIH26041)
 echo.
 echo  ================================================================
 echo.
 
-set PROJROOT=%~dp0
+set "PROJROOT=%~dp0"
 
-REM --- 1. Quick Requirements Validation ---
+REM --- 1. Requirements Validation ---
 echo  [1/4] Checking environment requirements...
 
 python --version >nul 2>&1
-if !errorlevel! neq 0 (
+if %errorlevel% neq 0 (
     echo.
-    echo   ❌ [ERROR] Python not found in PATH!
-    echo      Please install Python 3.10+ from https://www.python.org/
-    echo      Make sure to check "Add Python to PATH".
+    echo   [ERROR] Python was not found in your PATH.
+    echo   Please install Python from https://www.python.org/
+    echo   Make sure to check "Add Python to PATH" during installation.
     echo.
     pause
     exit /b 1
 )
 
 node --version >nul 2>&1
-if !errorlevel! neq 0 (
+if %errorlevel% neq 0 (
     echo.
-    echo   ❌ [ERROR] Node.js not found in PATH!
-    echo      Please install Node.js 18+ from https://nodejs.org/
+    echo   [ERROR] Node.js was not found in your PATH.
+    echo   Please install Node.js from https://nodejs.org/
     echo.
     pause
     exit /b 1
 )
 
-echo   ✅ Core tools verified (Python + Node.js)
+echo   [OK] Python and Node.js detected.
 echo.
 
 REM --- 2. Starting Backend Server ---
-echo  [2/4] Starting FastAPI Backend API on port 8000...
-start "SafeScape AR - Backend" cmd /k "call "%PROJROOT%start-backend.bat""
+echo  [2/4] Starting FastAPI Backend on port 8000...
+start "SafeScape AR - Backend" "%COMSPEC%" /k "cd /d "%PROJROOT%backend" && call "%PROJROOT%start-backend.bat""
 
-REM Give backend a short headstart
-timeout /t 2 >nul
+REM Non-blocking sleep
+ping 127.0.0.1 -n 3 >nul
 
 REM --- 3. Starting Admin Dashboard ---
-echo  [3/4] Starting React Admin Dashboard on port 5173...
-start "SafeScape AR - Dashboard" cmd /k "call "%PROJROOT%start-dashboard.bat""
+echo  [3/4] Starting Admin Dashboard on port 5173...
+start "SafeScape AR - Dashboard" "%COMSPEC%" /k "cd /d "%PROJROOT%dashboard" && call "%PROJROOT%start-dashboard.bat""
+
+REM Non-blocking sleep
+ping 127.0.0.1 -n 3 >nul
 
 REM --- 4. Starting Mobile App (Expo) ---
-echo  [4/4] Starting React Native Mobile App (Expo)...
-start "SafeScape AR - Mobile App" cmd /k "call "%PROJROOT%start-mobile.bat""
+echo  [4/4] Starting Mobile App (Expo)...
+start "SafeScape AR - Mobile App" "%COMSPEC%" /k "cd /d "%PROJROOT%mobile" && call "%PROJROOT%start-mobile.bat""
 
-timeout /t 3 >nul
+ping 127.0.0.1 -n 4 >nul
 
 REM --- Launch Browser ---
 echo.
-echo  Opening Admin Dashboard & Backend Docs in browser...
+echo  Opening Admin Dashboard and Backend Docs in your browser...
 start http://localhost:5173
 start http://localhost:8000/docs
 
 echo.
 echo  ================================================================
-echo   🚀  ALL SERVICES RUNNING SUCCESSFULLY!
+echo   ALL SERVICES ARE RUNNING!
 echo  ================================================================
 echo.
-echo   [1] 🔧 BACKEND API:
-echo       URL:  http://localhost:8000/docs (Swagger Interactive UI)
+echo   [1] BACKEND API:
+echo       URL: http://localhost:8000/docs
 echo.
-echo   [2] 🖥️ ADMIN DASHBOARD:
-echo       URL:  http://localhost:5173
-echo       Role: Manage workers, compliance reports, verify QR certificates
+echo   [2] ADMIN DASHBOARD:
+echo       URL: http://localhost:5173
 echo.
-echo   [3] 📱 MOBILE AR APPLICATION (EXPO):
+echo   [3] MOBILE AR APP (EXPO):
 echo       Look at the "SafeScape AR - Mobile App" window:
-echo       • SCAN the QR code with "Expo Go" app on any Android phone!
-echo       • OR press 'w' in the Mobile terminal to preview in Web browser
-echo       • Features: Multilingual (EN/HI/SAT), AR Fire & Gas Leakage,
-echo                   Auto Assessment (80%% rule), Digital QR Certificate,
-echo                   Offline Mode & Auto-Sync
+echo       - SCAN the QR code using "Expo Go" on your Android phone
+echo       - OR press 'w' in the Mobile terminal to open in Web browser
 echo.
-echo   To stop all running services at any time, run: stop-all.bat
+echo   To stop all services later, run: stop-all.bat
 echo  ================================================================
 echo.
-echo  Keep this window open or press any key to close launcher.
-pause >nul
+echo  Press any key to close this launcher window.
+pause
