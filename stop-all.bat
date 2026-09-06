@@ -41,6 +41,12 @@ if %errorlevel% equ 0 (
     echo   [--] No mobile window found
 )
 
+REM Cleanup any orphaned background processes on ports 8000, 5173, 8081
+for /f "tokens=5" %%a in ('netstat -aon 2^>nul ^| findstr ":8081 " ^| findstr "LISTENING"') do taskkill /F /PID %%a >nul 2>&1
+for /f "tokens=5" %%a in ('netstat -aon 2^>nul ^| findstr ":8000 " ^| findstr "LISTENING"') do taskkill /F /PID %%a >nul 2>&1
+for /f "tokens=5" %%a in ('netstat -aon 2^>nul ^| findstr ":5173 " ^| findstr "LISTENING"') do taskkill /F /PID %%a >nul 2>&1
+
+
 echo.
 echo  Done. All services stopped.
 echo.
