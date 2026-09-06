@@ -49,17 +49,26 @@ echo.
 set /p MODE="  Enter choice (1, 2, or 3) [Default: 1]: "
 if "%MODE%"=="" set MODE=1
 
-echo.
-if "%MODE%"=="2" (
-    echo   Starting in Cloud Tunnel mode (bypasses local network/firewall)...
-    call npx expo start --tunnel -c
-) else if "%MODE%"=="3" (
-    echo   Starting in Web browser mode...
-    call npx expo start --web -c
-) else (
-    echo   Starting in Standard LAN mode...
-    call npx expo start -c
-)
+if "%MODE%"=="2" goto start_tunnel
+if "%MODE%"=="3" goto start_web
+goto start_lan
+
+:start_tunnel
+echo   Starting in Cloud Tunnel mode: bypasses local firewall and mobile data...
+call npx expo start --tunnel -c
+goto server_done
+
+:start_web
+echo   Starting in Web browser mode...
+call npx expo start --web -c
+goto server_done
+
+:start_lan
+echo   Starting in Standard LAN mode...
+call npx expo start -c
+goto server_done
+
+:server_done
 
 echo.
 echo  Expo server stopped.
