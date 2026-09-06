@@ -55,7 +55,7 @@ echo   Press Ctrl+C to stop Expo server
 echo  ----------------------------------------------------------------
 echo.
 
-call npx expo start
+call npx expo start -c
 
 echo.
 echo  Expo server stopped.

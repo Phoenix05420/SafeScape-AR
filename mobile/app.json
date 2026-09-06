@@ -3,6 +3,7 @@
     "name": "SafeScape AR",
     "slug": "safescape-ar",
     "version": "1.0.0",
+    "sdkVersion": "57.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "splash": {
