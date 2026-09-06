@@ -1,11 +1,11 @@
 @echo off
 setlocal
-title SafeScape AR - Mobile App (Expo)
+title SafeScape AR - Mobile App (Expo SDK 57)
 color 0B
 
 echo.
 echo  ================================================================
-echo            SafeScape AR - Mobile App (React Native Expo)
+echo            SafeScape AR - Mobile App (Expo SDK 57)
 echo  ================================================================
 echo.
 
@@ -34,28 +34,32 @@ if not exist "node_modules" (
     )
     echo   [OK] Dependencies installed
 ) else (
-    echo   [OK] Mobile dependencies verified
+    echo   [OK] Mobile dependencies verified (SDK 57)
 )
 
 echo.
 echo  ================================================================
-echo   Starting Expo Development Server...
+echo   Select Connection Mode:
 echo  ================================================================
 echo.
-echo   HOW TO TEST ON YOUR ANDROID PHONE:
-echo     1. Install "Expo Go" app from Google Play Store
-echo     2. Scan the QR code that appears below with your phone camera
-echo     3. SafeScape AR will load immediately with interactive AR!
+echo   [1] Standard LAN Mode (Recommended if Phone and PC on same Wi-Fi)
+echo   [2] Cloud Tunnel Mode (RECOMMENDED IF PHONE IS ON MOBILE DATA 4G/5G)
+echo   [3] Open in Web Browser (No phone required)
 echo.
-echo   HOW TO TEST ON YOUR COMPUTER (WEB):
-echo     - Press 'w' in this terminal to open in browser
-echo     - Press 'a' for Android Emulator (if installed)
-echo.
-echo   Press Ctrl+C to stop Expo server
-echo  ----------------------------------------------------------------
-echo.
+set /p MODE="  Enter choice (1, 2, or 3) [Default: 1]: "
+if "%MODE%"=="" set MODE=1
 
-call npx expo start -c
+echo.
+if "%MODE%"=="2" (
+    echo   Starting in Cloud Tunnel mode (bypasses local network/firewall)...
+    call npx expo start --tunnel -c
+) else if "%MODE%"=="3" (
+    echo   Starting in Web browser mode...
+    call npx expo start --web -c
+) else (
+    echo   Starting in Standard LAN mode...
+    call npx expo start -c
+)
 
 echo.
 echo  Expo server stopped.
