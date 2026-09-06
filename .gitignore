@@ -20,10 +20,13 @@ dist/
 build/
 *.egg
 
-# ── Node.js / Dashboard ──────────────────
+# ── Node.js / Dashboard / Mobile ──────────
 node_modules/
 dashboard/dist/
 dashboard/.cache/
+mobile/.expo/
+.expo/
+web-build/
 *.tsbuildinfo
 
 # ── Unity ─────────────────────────────────

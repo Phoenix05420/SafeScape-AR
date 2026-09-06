@@ -157,6 +157,22 @@ if exist "%PROJROOT%dashboard\node_modules" (
     set /a WARN+=1
 )
 
+if exist "%PROJROOT%mobile\package.json" (
+    echo   [OK] Mobile app (Expo) package.json found
+    set /a PASS+=1
+) else (
+    echo   [FAIL] Mobile app package.json missing!
+    set /a FAIL+=1
+)
+
+if exist "%PROJROOT%mobile\node_modules" (
+    echo   [OK] Mobile app node_modules installed
+    set /a PASS+=1
+) else (
+    echo   [WARN] Mobile app node_modules not installed (run setup.bat first)
+    set /a WARN+=1
+)
+
 if exist "%PROJROOT%backend\venv" (
     echo   [OK] Backend virtual environment found
     set /a PASS+=1

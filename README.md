@@ -206,18 +206,37 @@ WORKER                                    SYSTEM
 | [PostgreSQL](https://www.postgresql.org/download/) | 14+ | ⚠️ Optional | Database (or use Docker) |
 | [Docker](https://www.docker.com/products/docker-desktop/) | Latest | ⚠️ Optional | Containerized setup |
 
-### Quick Start (One Command)
+### ⚡ Single Script Quick Start (One Command)
+
+To run the **entire platform** (Backend API + Admin Dashboard + React Native Expo Mobile App) with automated dependency checks in a single click:
 
 ```bash
-# Clone the repository
-git clone https://github.com/Phoenix05420/SafeScape-AR.git
-cd SafeScape-AR
-
-# Run the automated setup
-start.bat           # Windows — interactive menu
+# Windows One-Click Master Launcher
+run.bat
 ```
 
-Or set up each component manually:
+> **What `run.bat` does:**
+> 1. ✅ Checks Python and Node.js environments
+> 2. 🔧 Starts the **FastAPI Backend Server** (`http://localhost:8000/docs`)
+> 3. 🖥️ Starts the **React Admin Dashboard** (`http://localhost:5173`)
+> 4. 📱 Starts the **React Native Expo Mobile App** (Displays QR code for phone scanning)
+> 5. 🌐 Automatically launches your browser to the Dashboard & API Docs!
+
+---
+
+### 📱 How to Run the Mobile App on Your Phone (Expo Go)
+
+You don't need Android Studio or Unity installed to test on an actual phone!
+
+1. Install **Expo Go** from [Google Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent) (or Apple App Store)
+2. Run `start-mobile.bat` (or use `run.bat`)
+3. Scan the terminal's QR code with your phone's camera / Expo Go
+4. The full AR training experience (Fire safety, Gas leak, PPE, Assessment, QR Certificates) loads instantly!
+5. *(Optional)* Press `w` in the mobile terminal to run in your PC web browser!
+
+---
+
+### Manual Component Startup (Optional)
 
 ### 1️⃣ Backend (FastAPI)
 

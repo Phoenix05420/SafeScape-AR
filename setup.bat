@@ -120,11 +120,34 @@ if not exist "node_modules" (
 echo.
 
 REM ============================================
-REM  STEP 4: Verify Build
+REM  STEP 4: Setup Mobile App (Expo)
 REM ============================================
-echo  -- Step 4: Verifying dashboard build ---------
+echo  -- Step 4: Setting up Mobile App (Expo) -----
 echo.
 
+cd /d "%PROJROOT%mobile"
+
+if not exist "node_modules" (
+    echo   Installing mobile npm dependencies...
+    npm install --loglevel=error 2>nul
+    if !errorlevel! equ 0 (
+        echo   [OK] Mobile dependencies installed successfully
+    ) else (
+        echo   [FAIL] Mobile npm install failed!
+    )
+) else (
+    echo   [OK] Mobile node_modules already exists
+)
+
+echo.
+
+REM ============================================
+REM  STEP 5: Verify Build
+REM ============================================
+echo  -- Step 5: Verifying dashboard build ---------
+echo.
+
+cd /d "%PROJROOT%dashboard"
 call npm run build >nul 2>&1
 if !errorlevel! equ 0 (
     echo   [OK] Dashboard builds successfully!

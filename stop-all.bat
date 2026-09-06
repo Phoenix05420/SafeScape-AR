@@ -31,6 +31,16 @@ if %errorlevel% equ 0 (
     echo   [--] No dashboard window found
 )
 
+REM Kill Mobile (expo)
+tasklist /FI "WINDOWTITLE eq SafeScape AR - Mobile*" 2>nul | find /I "cmd.exe" >nul
+if %errorlevel% equ 0 (
+    echo   Stopping Mobile App window...
+    taskkill /FI "WINDOWTITLE eq SafeScape AR - Mobile*" /F >nul 2>&1
+    echo   [OK] Mobile App stopped
+) else (
+    echo   [--] No mobile window found
+)
+
 echo.
 echo  Done. All services stopped.
 echo.
