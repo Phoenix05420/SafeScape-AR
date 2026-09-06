@@ -1,0 +1,11 @@
+{
+  "main_menu_title": "SafeScape AR",
+  "btn_start_training": "Start Training",
+  "btn_certificates": "My Certificates",
+  "btn_settings": "Settings",
+  "btn_profile": "Profile",
+  "fire_safety_title": "Fire Safety",
+  "gas_leak_title": "Gas Leak",
+  "assessment_passed": "Passed!",
+  "assessment_failed": "Failed. Try Again."
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "ModuleId": "fire-safety-01",
+    "Title": "Fire Safety Basics",
+    "Type": "FireSafety",
+    "Difficulty": "Beginner"
+  },
+  {
+    "ModuleId": "gas-leak-01",
+    "Title": "Gas Leak Response",
+    "Type": "GasLeak",
+    "Difficulty": "Intermediate"
+  }
+]

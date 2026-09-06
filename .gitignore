@@ -1,0 +1,66 @@
+# ═══════════════════════════════════════════
+#  SafeScape AR — .gitignore
+# ═══════════════════════════════════════════
+
+# ── Python / Backend ──────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+venv/
+env/
+.env
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Node.js / Dashboard ──────────────────
+node_modules/
+dashboard/dist/
+dashboard/.cache/
+*.tsbuildinfo
+
+# ── Unity ─────────────────────────────────
+unity-app/[Ll]ibrary/
+unity-app/[Tt]emp/
+unity-app/[Oo]bj/
+unity-app/[Bb]uild/
+unity-app/[Bb]uilds/
+unity-app/[Ll]ogs/
+unity-app/[Uu]ser[Ss]ettings/
+unity-app/[Mm]emory[Cc]aptures/
+unity-app/[Rr]ecordings/
+unity-app/Assets/Plugins/Editor/JetBrains*
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+sysinfo.txt
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# ── IDE ───────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.csproj
+*.user
+
+# ── OS ────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Misc ──────────────────────────────────
+*.log
+*.bak
+*.tmp
+*.swp
+scaffold*.cjs
+generate_backend.py
