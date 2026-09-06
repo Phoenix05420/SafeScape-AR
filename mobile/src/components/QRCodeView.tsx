@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Svg, { Rect } from 'react-native-svg';
 
 interface Props {
   value: string;
@@ -41,27 +40,27 @@ function generateMatrix(text: string, count = 21): boolean[][] {
 export const QRCodeView: React.FC<Props> = ({ value, size = 160 }) => {
   const count = 21;
   const matrix = React.useMemo(() => generateMatrix(value, count), [value]);
-  const cellSize = size / count;
+  const cellSize = Math.floor(size / count);
+  const actualSize = cellSize * count;
 
   return (
-    <View style={[styles.container, { width: size + 16, height: size + 16 }]}>
-      <Svg width={size} height={size}>
-        <Rect x="0" y="0" width={size} height={size} fill="#ffffff" />
-        {matrix.map((row, r) =>
-          row.map((active, c) =>
-            active ? (
-              <Rect
-                key={`${r}-${c}`}
-                x={c * cellSize}
-                y={r * cellSize}
-                width={cellSize}
-                height={cellSize}
-                fill="#0f172a"
+    <View style={[styles.container, { width: actualSize + 16, height: actualSize + 16 }]}>
+      <View style={{ width: actualSize, height: actualSize, backgroundColor: '#ffffff' }}>
+        {matrix.map((row, r) => (
+          <View key={`row-${r}`} style={{ flexDirection: 'row', height: cellSize }}>
+            {row.map((active, c) => (
+              <View
+                key={`cell-${r}-${c}`}
+                style={{
+                  width: cellSize,
+                  height: cellSize,
+                  backgroundColor: active ? '#0f172a' : '#ffffff',
+                }}
               />
-            ) : null
-          )
-        )}
-      </Svg>
+            ))}
+          </View>
+        ))}
+      </View>
     </View>
   );
 };
