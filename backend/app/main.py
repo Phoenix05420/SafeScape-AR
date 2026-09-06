@@ -11,7 +11,7 @@ async def lifespan(app: FastAPI):
         await conn.run_sync(Base.metadata.create_all)
     yield
 
-app = FastAPI(title="SafeScape AR API", lifespan=lifspan)
+app = FastAPI(title="SafeScape AR API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

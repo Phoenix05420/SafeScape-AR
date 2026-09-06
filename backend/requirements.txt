@@ -5,9 +5,10 @@ asyncpg
 pydantic
 pydantic-settings
 python-jose[cryptography]
-passlib[bcrypt]
+bcrypt
 python-multipart
 qrcode
 Pillow
 alembic
 python-dotenv
+email-validator

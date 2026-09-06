@@ -8,8 +8,13 @@ __pycache__/
 *$py.class
 *.so
 venv/
+.venv/
 env/
 .env
+.env.*
+*.db
+*.sqlite
+*.sqlite3
 *.egg-info/
 dist/
 build/
