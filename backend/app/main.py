@@ -1,14 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from app.database import engine, Base
+from app.database import init_db
 from app.routers import auth, workers, training, assessment, certificates, analytics, sync
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # In production, use Alembic instead of this
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    await init_db()
     yield
 
 app = FastAPI(title="SafeScape AR API", lifespan=lifespan)
