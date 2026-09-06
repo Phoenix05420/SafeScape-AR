@@ -124,9 +124,9 @@ export const ARFireTrainingScreen: React.FC<Props> = ({ lang, onFinishTraining, 
     <View style={styles.container}>
       {/* Real Camera or Simulated AR Backdrop */}
       {permission?.granted ? (
-        <CameraView style={StyleSheet.absoluteFillObject} facing="back" />
+        <CameraView style={StyleSheet.absoluteFill} facing="back" />
       ) : (
-        <View style={[StyleSheet.absoluteFillObject, styles.simulatedRoom]}>
+        <View style={[StyleSheet.absoluteFill, styles.simulatedRoom]}>
           <Text style={styles.simText}>[ INDUSTRIAL PLANT WORK AREA ]</Text>
         </View>
       )}

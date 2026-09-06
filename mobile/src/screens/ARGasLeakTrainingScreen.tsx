@@ -89,9 +89,9 @@ export const ARGasLeakTrainingScreen: React.FC<Props> = ({ lang, onFinishTrainin
   return (
     <View style={styles.container}>
       {permission?.granted ? (
-        <CameraView style={StyleSheet.absoluteFillObject} facing="back" />
+        <CameraView style={StyleSheet.absoluteFill} facing="back" />
       ) : (
-        <View style={[StyleSheet.absoluteFillObject, styles.simulatedMine]}>
+        <View style={[StyleSheet.absoluteFill, styles.simulatedMine]}>
           <Text style={styles.simText}>[ CONFINED MINE CHAMBER / WORKPLACE ]</Text>
         </View>
       )}
