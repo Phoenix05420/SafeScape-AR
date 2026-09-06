@@ -30,7 +30,8 @@
         {
           "cameraPermission": "Allow SafeScape AR to access your camera for AR safety training."
         }
-      ]
+      ],
+      "expo-asset"
     ]
   }
 }
